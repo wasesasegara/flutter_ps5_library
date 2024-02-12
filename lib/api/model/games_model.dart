@@ -21,7 +21,7 @@ class GameModel {
   final String name;
   final String slug;
   final String released;
-  final String backgroundImage;
+  final String? backgroundImage;
 
   GameModel({
     required this.id,

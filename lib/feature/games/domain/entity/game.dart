@@ -3,7 +3,7 @@ class Game {
   final String name;
   final String slug;
   final String released;
-  final String backgroundImage;
+  final String? backgroundImage;
 
   Game({
     required this.id,
