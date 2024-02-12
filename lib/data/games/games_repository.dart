@@ -1,6 +1,9 @@
-import 'package:flutter_ps5_library/api/api/api_get_games.dart';
-import 'package:flutter_ps5_library/feature/games/domain/data/games_repository.dart';
-import 'package:flutter_ps5_library/feature/games/domain/entity/game.dart';
+import 'package:flutter_ps5_library/api/games/api_get_games.dart';
+import 'package:flutter_ps5_library/domain/games/entity/game.dart';
+
+abstract class GamesRepository {
+  Future<List<Game>> fetchGames({required int page, required String platforms});
+}
 
 class GamesRepositoryImpl implements GamesRepository {
   @override

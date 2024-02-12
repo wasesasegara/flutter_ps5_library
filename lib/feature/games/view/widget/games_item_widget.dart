@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ps5_library/feature/games/domain/entity/game.dart';
+import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 
 class GamesItemWidget extends StatelessWidget {
   final VoidCallback onTap;

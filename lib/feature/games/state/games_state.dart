@@ -1,4 +1,4 @@
-import 'package:flutter_ps5_library/feature/games/domain/entity/game.dart';
+import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 
 class GamesState {
   bool isFirstFetch = true;

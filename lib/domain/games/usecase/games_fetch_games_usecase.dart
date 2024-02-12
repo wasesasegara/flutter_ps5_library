@@ -1,5 +1,5 @@
-import 'package:flutter_ps5_library/feature/games/domain/data/games_repository.dart';
-import 'package:flutter_ps5_library/feature/games/domain/entity/game.dart';
+import 'package:flutter_ps5_library/data/games/games_repository.dart';
+import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 
 abstract class GamesFetchGamesUsecase {
   Future<List<Game>> call(int page, String platforms);

@@ -90,7 +90,7 @@ class _GamesScreenState extends State<GamesScreen> {
           return GamesItemWidget(
             game: game,
             onTap: () => context.goNamed(
-              GameDetailScreen.routeName,
+              GameDetailsScreen.routeName,
               pathParameters: {'id': game.id.toString()},
               queryParameters: {'title': game.name},
             ),

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class GameDetailScreen extends StatefulWidget {
+class GameDetailsScreen extends StatefulWidget {
   static String routeName = 'game-detail';
 
   final String? id;
   final String? title;
 
-  const GameDetailScreen({super.key, required this.id, this.title});
+  const GameDetailsScreen({super.key, required this.id, this.title});
 
   @override
-  State<GameDetailScreen> createState() => _GameDetailScreenState();
+  State<GameDetailsScreen> createState() => _GameDetailsScreenState();
 }
 
-class _GameDetailScreenState extends State<GameDetailScreen> {
+class _GameDetailsScreenState extends State<GameDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

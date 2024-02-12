@@ -1,10 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter_ps5_library/api/api_config.dart';
+import 'package:flutter_ps5_library/data/games/model/game_model.dart';
+import 'package:flutter_ps5_library/data/games/model/games_model.dart';
 import 'package:flutter_ps5_library/utils/utils.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:flutter_ps5_library/api/api_config.dart';
-import 'package:flutter_ps5_library/api/model/games_model.dart';
 
 Future<List<GameModel>> apiGetGames(GetGamesParams params) async {
   final uri = Uri.https(Endpoints.rawg, '/api/games', {

@@ -1,20 +1,4 @@
-import 'package:flutter_ps5_library/feature/games/domain/entity/game.dart';
-
-class GamesModel {
-  final List<GameModel> results;
-
-  GamesModel({
-    required this.results,
-  });
-
-  factory GamesModel.fromJson(Map<String, dynamic> json) {
-    return GamesModel(
-      results: json['results'] is List
-          ? (json['results'] as List).map((e) => GameModel.fromJson(e)).toList()
-          : [],
-    );
-  }
-}
+import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 
 class GameModel {
   final int id;

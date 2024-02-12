@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_ps5_library/api/api_config.dart';
-import 'package:flutter_ps5_library/feature/games/data/games_repository_impl.dart';
-import 'package:flutter_ps5_library/feature/games/domain/data/games_repository.dart';
+import 'package:flutter_ps5_library/data/games/games_repository.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_state.dart';
-import 'package:flutter_ps5_library/feature/games/usecase/games_fetch_games_usecase.dart';
+import 'package:flutter_ps5_library/domain/games/usecase/games_fetch_games_usecase.dart';
 
 class GamesProvider extends ChangeNotifier {
   final String _preferredPlatform = Platforms.preferred;

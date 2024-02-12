@@ -48,9 +48,9 @@ final GoRouter _router = GoRouter(
       routes: [
         GoRoute(
           path: '${GamesScreen.routePath}/:id',
-          name: GameDetailScreen.routeName,
+          name: GameDetailsScreen.routeName,
           builder: (BuildContext context, GoRouterState state) {
-            return GameDetailScreen(
+            return GameDetailsScreen(
               id: state.pathParameters['id'],
               title: state.uri.queryParameters['title'],
             );
