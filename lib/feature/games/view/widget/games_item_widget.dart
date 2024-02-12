@@ -14,8 +14,7 @@ class GamesItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String image =
-        game.backgroundImage ?? game.shortScreenshots.firstOrNull ?? '';
+    String image = game.bgImageUrl;
     return LayoutBuilder(builder: (context, cons) {
       final height = cons.maxWidth;
       return InkWell(
@@ -29,7 +28,7 @@ class GamesItemWidget extends StatelessWidget {
                 ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 imageUrl: image,
-                memCacheHeight: 125,
+                memCacheWidth: MediaQuery.of(context).size.width.toInt(),
                 height: height,
                 fit: BoxFit.cover,
               )
@@ -38,7 +37,17 @@ class GamesItemWidget extends StatelessWidget {
                 color: Theme.of(context).primaryColor.withOpacity(0.5),
                 width: double.infinity,
                 height: height,
-                child: const Icon(Icons.gamepad, color: Colors.white),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.gamepad),
+                    SizedBox(height: 4),
+                    Text(
+                      'No preview available',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
               ),
             Positioned(
               bottom: 0,
@@ -46,15 +55,52 @@ class GamesItemWidget extends StatelessWidget {
                 width: cons.maxWidth,
                 padding: const EdgeInsets.all(8),
                 color: Colors.black.withOpacity(0.6),
-                child: Text(
-                  game.name,
-                  style: const TextStyle(color: Colors.white),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (game.name?.isNotEmpty ?? false)
+                      Text(
+                        game.name!,
+                      ),
+                    if (game.released?.isNotEmpty ?? false)
+                      Text(
+                        'Release date: ${game.released!}',
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                    if ((game.name?.isNotEmpty ?? false) &&
+                        (game.description?.isNotEmpty ?? false))
+                      const SizedBox(height: 4),
+                    if (game.description?.isNotEmpty ?? false)
+                      Text(
+                        game.description!,
+                      ),
+                  ],
                 ),
               ),
             ),
+            if (game.rating > 0)
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  color: ratingColor(game.rating),
+                  child: Text(
+                    game.rating.toString(),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
+              ),
           ],
         ),
       );
     });
   }
+}
+
+Color ratingColor(double rating) {
+  if (rating > 3) return const Color.fromARGB(255, 74, 157, 77);
+  if (rating > 2) return const Color.fromARGB(255, 195, 117, 0);
+  return const Color.fromARGB(255, 181, 41, 31);
 }

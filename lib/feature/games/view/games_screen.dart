@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ps5_library/feature/game_details/state/game_details_provider.dart';
 import 'package:flutter_ps5_library/feature/game_details/view/game_details_screen.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_provider.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_state.dart';
@@ -56,16 +57,31 @@ class _GamesScreenState extends State<GamesScreen> {
           if (p.state.isFirstFetch || p.state.isFetching) {
             return loading ?? Container();
           }
-          if (p.state.errMsg.isNotEmpty) {
-            return Center(child: Text(p.state.errMsg));
-          }
-          if (p.state.games.isEmpty) {
-            return const Center(child: Text('No games found'));
-          }
+          if (p.state.errMsg.isNotEmpty) return errBtn(p.state.errMsg);
+          if (p.state.games.isEmpty) return errBtn('No games found');
         }
         return grid(p.state);
       },
       child: const Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Widget errBtn(String text) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(text),
+          const SizedBox(height: 8),
+          ElevatedButton(
+            onPressed: () {
+              final p = Provider.of<GamesProvider>(context, listen: false);
+              p.fetchGames(page: 1);
+            },
+            child: const Text('Retry'),
+          )
+        ],
+      ),
     );
   }
 
@@ -89,11 +105,17 @@ class _GamesScreenState extends State<GamesScreen> {
           final game = state.games[index];
           return GamesItemWidget(
             game: game,
-            onTap: () => context.goNamed(
-              GameDetailsScreen.routeName,
-              pathParameters: {'id': game.id.toString()},
-              queryParameters: {'title': game.name},
-            ),
+            onTap: () async {
+              final p =
+                  Provider.of<GameDetailsProvider>(context, listen: false);
+              p.state.game = game;
+              await context.pushNamed(
+                GameDetailsScreen.routeName,
+                pathParameters: {'id': game.id.toString()},
+                queryParameters: {'title': game.name},
+              );
+              p.state.reset();
+            },
           );
         },
       ),

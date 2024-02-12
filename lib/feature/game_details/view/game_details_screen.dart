@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 import 'package:flutter_ps5_library/feature/game_details/state/game_details_provider.dart';
@@ -19,10 +20,9 @@ class _GameDetailsScreenState extends State<GameDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    final p = Provider.of<GameDetailsProvider>(context, listen: false);
-    p.state.reset();
     if (widget.id == null) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      final p = Provider.of<GameDetailsProvider>(context, listen: false);
       p.fetchGame(widget.id!);
     });
   }
@@ -57,6 +57,18 @@ class _GameDetailsScreenState extends State<GameDetailsScreen> {
   }
 
   Widget details(Game g) {
-    return Center(child: Text(g.id.toString()));
+    String image = g.bgImageUrl;
+    return ListView(children: [
+      CachedNetworkImage(
+        progressIndicatorBuilder: (context, url, progress) => Center(
+          child: CircularProgressIndicator(value: progress.progress),
+        ),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
+        imageUrl: image,
+        memCacheWidth: MediaQuery.of(context).size.width.toInt(),
+        width: double.infinity,
+        fit: BoxFit.cover,
+      )
+    ]);
   }
 }

@@ -11,19 +11,18 @@ class GamesItemMoreWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.games, color: Colors.white),
+            const Icon(Icons.games),
             const SizedBox(height: 8),
             SizedBox(
               width: cons.maxWidth * 0.4,
               child: const LinearProgressIndicator(
-                color: Colors.white,
                 backgroundColor: Colors.transparent,
               ),
             ),
             const SizedBox(height: 8),
             const Text(
               'Give me more...!',
-              style: TextStyle(color: Colors.white, fontSize: 12),
+              style: TextStyle(fontSize: 12),
             )
           ],
         ),
