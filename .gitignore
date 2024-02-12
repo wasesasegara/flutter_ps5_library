@@ -25,3 +25,22 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+coverage/lcov.info
+coverage/coverage/html/cmd_line
+coverage/html/amber.png
+coverage/html/cmd_line
+coverage/html/emerald.png
+coverage/html/gcov.css
+coverage/html/glass.png
+coverage/html/index-sort-f.html
+coverage/html/index-sort-l.html
+coverage/html/index.html
+coverage/html/ruby.png
+coverage/html/snow.png
+coverage/html/updown.png
+coverage/html/utils/lib/utils/index-sort-f.html
+coverage/html/utils/lib/utils/index-sort-l.html
+coverage/html/utils/lib/utils/index.html
+coverage/html/utils/lib/utils/utils.dart.func-c.html
+coverage/html/utils/lib/utils/utils.dart.func.html
+coverage/html/utils/lib/utils/utils.dart.gcov.html
