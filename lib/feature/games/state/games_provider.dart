@@ -33,10 +33,10 @@ class GamesProvider extends ChangeNotifier {
         state.games.addAll(games);
       }
       if (games.isEmpty) state.hasMorePage = false;
-      state.isFirstFetch = false;
     } catch (e) {
       state.errMsg = e.toString();
     }
+    state.isFirstFetch = false;
     state.isFetching = false;
     notifyListeners();
   }

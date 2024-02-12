@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ps5_library/feature/game_detail/view/game_detail_screen.dart';
+import 'package:flutter_ps5_library/feature/game_details/view/game_details_screen.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_provider.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_state.dart';
 import 'package:flutter_ps5_library/feature/games/view/widget/games_item_more_widget.dart';

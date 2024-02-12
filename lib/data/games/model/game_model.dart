@@ -4,7 +4,7 @@ class GameModel {
   final int id;
   final String name;
   final String slug;
-  final String released;
+  final String? released;
   final String? backgroundImage;
   final List<Screenshot> shortScreenshots;
 
