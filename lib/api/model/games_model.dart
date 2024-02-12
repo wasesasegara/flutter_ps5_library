@@ -22,6 +22,7 @@ class GameModel {
   final String slug;
   final String released;
   final String? backgroundImage;
+  final List<Screenshot> shortScreenshots;
 
   GameModel({
     required this.id,
@@ -29,6 +30,7 @@ class GameModel {
     required this.slug,
     required this.released,
     required this.backgroundImage,
+    required this.shortScreenshots,
   });
 
   factory GameModel.fromJson(Map<String, dynamic> json) {
@@ -38,6 +40,11 @@ class GameModel {
       slug: json['slug'],
       released: json['released'],
       backgroundImage: json['background_image'],
+      shortScreenshots: json['short_screenshots'] is List
+          ? (json['short_screenshots'] as List)
+              .map((e) => Screenshot.fromJson(e))
+              .toList()
+          : [],
     );
   }
 
@@ -48,6 +55,21 @@ class GameModel {
       slug: slug,
       released: released,
       backgroundImage: backgroundImage,
+      shortScreenshots: shortScreenshots.map((e) => e.image).toList(),
+    );
+  }
+}
+
+class Screenshot {
+  final String image;
+
+  Screenshot({
+    required this.image,
+  });
+
+  factory Screenshot.fromJson(Map<String, dynamic> json) {
+    return Screenshot(
+      image: json['image'],
     );
   }
 }

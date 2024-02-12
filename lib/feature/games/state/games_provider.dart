@@ -22,10 +22,19 @@ class GamesProvider extends ChangeNotifier {
     if (state.isFetching) return;
     state.isFetching = true;
     state.hasMorePage = true;
+    notifyListeners();
+    state.errMsg = '';
     try {
-      final games = await _getGames(page ?? 1, _preferredPlatform);
-      state.games.addAll(games);
+      final games = await _getGames(page ?? state.page + 1, _preferredPlatform);
+      if (page == 1) {
+        state.games = games;
+        state.page = 1;
+      } else {
+        state.page += 1;
+        state.games.addAll(games);
+      }
       if (games.isEmpty) state.hasMorePage = false;
+      state.isFirstFetch = false;
     } catch (e) {
       state.errMsg = e.toString();
     }

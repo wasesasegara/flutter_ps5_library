@@ -4,6 +4,7 @@ class Game {
   final String slug;
   final String released;
   final String? backgroundImage;
+  final List<String> shortScreenshots;
 
   Game({
     required this.id,
@@ -11,5 +12,6 @@ class Game {
     required this.slug,
     required this.released,
     required this.backgroundImage,
+    required this.shortScreenshots,
   });
 }
