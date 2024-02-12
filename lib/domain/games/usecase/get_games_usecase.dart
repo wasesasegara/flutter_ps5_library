@@ -1,16 +1,16 @@
 import 'package:flutter_ps5_library/data/games/games_repository.dart';
 import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 
-abstract class GamesFetchGamesUsecase {
+abstract class GetGamesUsecase {
   Future<List<Game>> call(int page, String platforms);
 }
 
-class GamesFetchGamesUsecaseImpl implements GamesFetchGamesUsecase {
+class GetGamesUsecaseImpl implements GetGamesUsecase {
   final GamesRepository repo;
 
-  GamesFetchGamesUsecaseImpl(this.repo);
+  GetGamesUsecaseImpl(this.repo);
 
   @override
   Future<List<Game>> call(int page, String platforms) =>
-      repo.fetchGames(page: page, platforms: platforms);
+      repo.getGames(page: page, platforms: platforms);
 }

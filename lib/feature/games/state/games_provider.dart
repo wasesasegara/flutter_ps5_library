@@ -2,20 +2,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_ps5_library/api/api_config.dart';
 import 'package:flutter_ps5_library/data/games/games_repository.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_state.dart';
-import 'package:flutter_ps5_library/domain/games/usecase/games_fetch_games_usecase.dart';
+import 'package:flutter_ps5_library/domain/games/usecase/get_games_usecase.dart';
 
 class GamesProvider extends ChangeNotifier {
   final String _preferredPlatform = Platforms.preferred;
 
   final GamesState state = GamesState();
 
-  final GamesFetchGamesUsecase _getGames;
+  final GetGamesUsecase _getGames;
 
   GamesProvider({
     GamesRepository? repo,
-    GamesFetchGamesUsecase? getGames,
-  }) : _getGames = getGames ??
-            GamesFetchGamesUsecaseImpl(repo ?? GamesRepositoryImpl());
+    GetGamesUsecase? getGames,
+  }) : _getGames =
+            getGames ?? GetGamesUsecaseImpl(repo ?? GamesRepositoryImpl());
 
   Future<void> fetchGames({int? page}) async {
     if (state.isFetching) return;
