@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ps5_library/feature/game_detail/view/game_detail_screen.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_provider.dart';
 import 'package:flutter_ps5_library/feature/games/view/games_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(appProviders);
-}
-
-MultiProvider get appProviders {
-  return MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => GamesProvider()),
-    ],
-    child: const MyApp(),
-  );
 }
 
 class MyApp extends StatefulWidget {
@@ -26,13 +19,44 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'PS5 Library',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const GamesScreen(),
+      routerConfig: _router,
     );
   }
 }
+
+final MultiProvider appProviders = MultiProvider(
+  providers: [
+    ChangeNotifierProvider(create: (_) => GamesProvider()),
+  ],
+  child: const MyApp(),
+);
+
+final GoRouter _router = GoRouter(
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      name: GamesScreen.routeName,
+      builder: (BuildContext context, GoRouterState state) {
+        return const GamesScreen();
+      },
+      routes: [
+        GoRoute(
+          path: '${GamesScreen.routePath}/:id',
+          name: GameDetailScreen.routeName,
+          builder: (BuildContext context, GoRouterState state) {
+            return GameDetailScreen(
+              id: state.pathParameters['id'],
+              title: state.uri.queryParameters['title'],
+            );
+          },
+        ),
+      ],
+    ),
+  ],
+);

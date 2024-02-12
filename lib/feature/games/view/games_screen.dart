@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ps5_library/feature/game_detail/view/game_detail_screen.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_provider.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_state.dart';
 import 'package:flutter_ps5_library/feature/games/view/widget/games_item_more_widget.dart';
 import 'package:flutter_ps5_library/feature/games/view/widget/games_item_widget.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class GamesScreen extends StatefulWidget {
+  static String routePath = 'games';
+  static String routeName = 'games';
+
   const GamesScreen({super.key});
 
   @override
@@ -80,13 +85,15 @@ class _GamesScreenState extends State<GamesScreen> {
         ),
         itemCount: state.games.length + (state.hasMorePage ? 1 : 0),
         itemBuilder: (context, index) {
-          if (index == state.games.length) {
-            return const GamesItemMoreWidget();
-          }
+          if (index == state.games.length) return const GamesItemMoreWidget();
           final game = state.games[index];
           return GamesItemWidget(
             game: game,
-            onTap: () {},
+            onTap: () => context.goNamed(
+              GameDetailScreen.routeName,
+              pathParameters: {'id': game.id.toString()},
+              queryParameters: {'title': game.name},
+            ),
           );
         },
       ),
