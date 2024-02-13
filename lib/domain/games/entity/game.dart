@@ -37,6 +37,29 @@ class Game {
     required this.shortScreenshots,
     required this.released,
   });
+
+  Game updatedWith(Game g) {
+    return Game(
+      id: g.id ?? id,
+      slug: g.slug ?? slug,
+      name: g.name ?? name,
+      nameOriginal: g.nameOriginal ?? nameOriginal,
+      description: g.description ?? description,
+      metacritic: g.metacritic ?? metacritic,
+      metacriticPlatforms: g.metacriticPlatforms.isNotEmpty
+          ? g.metacriticPlatforms
+          : metacriticPlatforms,
+      tba: g.tba ?? tba,
+      updated: g.updated ?? updated,
+      backgroundImage: g.backgroundImage ?? backgroundImage,
+      website: g.website ?? website,
+      rating: g.rating > 0 ? g.rating : rating,
+      playtime: g.playtime > 0 ? g.playtime : playtime,
+      shortScreenshots:
+          g.shortScreenshots.isNotEmpty ? g.shortScreenshots : shortScreenshots,
+      released: g.released ?? released,
+    );
+  }
 }
 
 class Screenshot {

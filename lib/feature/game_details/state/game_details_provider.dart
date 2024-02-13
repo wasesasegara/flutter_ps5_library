@@ -20,7 +20,7 @@ class GameDetailsProvider extends ChangeNotifier {
     notifyListeners();
     state.errMsg = '';
     try {
-      state.game = await _getGame(id);
+      state.game = state.game?.updatedWith(await _getGame(id));
     } catch (e) {
       state.errMsg = e.toString();
     }

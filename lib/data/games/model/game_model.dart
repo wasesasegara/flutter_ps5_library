@@ -52,7 +52,7 @@ class GameModel {
               .toList()
           : [],
       tba: json['tba'],
-      updated: DateTime.tryParse(json['updated'] ?? ''),
+      updated: DateTime.tryParse(json['updated'] ?? '')?.toLocal(),
       backgroundImage: json['background_image'],
       website: json['website'],
       rating: json['rating'],
