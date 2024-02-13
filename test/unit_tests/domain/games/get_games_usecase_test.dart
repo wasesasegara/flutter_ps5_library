@@ -32,6 +32,8 @@ final game1 = Game(
   playtime: 0,
   shortScreenshots: [],
   released: null,
+  developers: [],
+  platforms: [],
 );
 
 void main() {

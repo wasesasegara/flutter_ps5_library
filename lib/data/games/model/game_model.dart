@@ -1,4 +1,8 @@
+import 'package:flutter_ps5_library/domain/games/entity/developer.dart';
 import 'package:flutter_ps5_library/domain/games/entity/game.dart';
+import 'package:flutter_ps5_library/domain/games/entity/game_platform_metacritic.dart';
+import 'package:flutter_ps5_library/domain/games/entity/platform.dart';
+import 'package:flutter_ps5_library/domain/games/entity/screenshot.dart';
 
 class GameModel {
   final int? id;
@@ -18,6 +22,8 @@ class GameModel {
   final int playtime;
   final List<Screenshot> shortScreenshots;
   final String? released;
+  final List<Developer> developers;
+  final List<Platform> platforms;
 
   GameModel({
     required this.id,
@@ -35,6 +41,8 @@ class GameModel {
     required this.playtime,
     required this.shortScreenshots,
     required this.released,
+    required this.developers,
+    required this.platforms,
   });
 
   factory GameModel.fromJson(Map<String, dynamic> json) {
@@ -63,6 +71,20 @@ class GameModel {
               .map((e) => Screenshot(image: e['image']))
               .toList()
           : [],
+      developers: json['developers'] is List
+          ? (json['developers'] as List)
+              .map((e) =>
+                  Developer(id: e['id'], name: e['name'], slug: e['slug']))
+              .toList()
+          : [],
+      platforms: json['platforms'] is List
+          ? (json['platforms'] as List)
+              .map((e) => Platform(
+                  id: e['platform']['id'],
+                  name: e['platform']['name'],
+                  imageBackground: e['platform']['image_background']))
+              .toList()
+          : [],
     );
   }
 
@@ -83,6 +105,8 @@ class GameModel {
       playtime: playtime,
       shortScreenshots: shortScreenshots,
       released: released,
+      developers: developers,
+      platforms: platforms,
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 import 'package:flutter_ps5_library/feature/game_details/state/game_details_provider.dart';
 import 'package:flutter_ps5_library/feature/game_details/state/game_details_state.dart';
-import 'package:flutter_ps5_library/feature/games/view/widget/games_item_widget.dart';
+import 'package:flutter_ps5_library/utils/widget/rating_widget.dart';
 import 'package:flutter_ps5_library/utils/widget/text_placeholder_widget.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:go_router/go_router.dart';
@@ -142,9 +142,17 @@ class _GameDetailsScreenState extends State<GameDetailsScreen> {
           width: double.infinity,
           fit: BoxFit.cover,
         ),
-      if (g.name?.isNotEmpty ?? false)
+      if (g.developers.isNotEmpty)
         Padding(
           padding: const EdgeInsets.all(20).copyWith(bottom: 0),
+          child: Text(
+            g.developers.map((e) => e.name).join(', '),
+          ),
+        ),
+      if (g.name?.isNotEmpty ?? false)
+        Padding(
+          padding: const EdgeInsets.all(20)
+              .copyWith(top: g.developers.isNotEmpty ? 0 : 20, bottom: 0),
           child: Text(
             g.name ?? 'No name',
             style: Theme.of(context).textTheme.titleLarge,
@@ -158,22 +166,21 @@ class _GameDetailsScreenState extends State<GameDetailsScreen> {
               if (g.rating > 0) ...[
                 const Text('Rating'),
                 const SizedBox(width: 8),
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  color: ratingColor(g.rating),
-                  child: Text(
-                    g.rating.toString(),
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                ),
+                RatingWidget(rating: g.rating),
                 const Spacer(),
               ],
               if (g.released?.isNotEmpty ?? false) ...[
-                const Text('Released'),
-                const SizedBox(width: 8),
-                Text(g.released ?? ''),
+                Text('Released at ${g.released}'),
               ],
             ],
+          ),
+        ),
+      if (g.platforms.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.all(20).copyWith(top: 8, bottom: 0),
+          child: Text(
+            g.platforms.map((e) => e.name).join(', '),
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
       Padding(
@@ -182,23 +189,12 @@ class _GameDetailsScreenState extends State<GameDetailsScreen> {
       ),
       if (g.updated != null)
         Padding(
-          padding: const EdgeInsets.all(20).copyWith(top: 8, bottom: 0),
+          padding: const EdgeInsets.all(20).copyWith(top: 16, bottom: 0),
           child: Text(
             'Updated at '
             '${formatDate(g.updated!, [d, ' ', M, ' ', yyyy])}',
             style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ),
-      if (g.website?.isNotEmpty ?? false)
-        GestureDetector(
-          onTap: () => _openWebsite(g.website!),
-          child: Padding(
-            padding: const EdgeInsets.all(20)
-                .copyWith(top: g.updated != null ? 0 : 8, bottom: 0),
-            child: Text(
-              g.website!,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
+            textAlign: TextAlign.right,
           ),
         ),
       if (g.shortScreenshots.isNotEmpty)
@@ -216,6 +212,19 @@ class _GameDetailsScreenState extends State<GameDetailsScreen> {
             _screenshots(g)
           ],
         ),
+      if (g.website?.isNotEmpty ?? false)
+        GestureDetector(
+          onTap: () => _openWebsite(g.website!),
+          child: Padding(
+            padding: const EdgeInsets.all(20).copyWith(bottom: 0),
+            child: Text(
+              g.website!,
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      SizedBox(height: 16 + MediaQuery.of(context).padding.bottom)
     ]);
   }
 

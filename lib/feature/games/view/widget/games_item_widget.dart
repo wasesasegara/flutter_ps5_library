@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 import 'package:flutter_ps5_library/utils/config.dart';
+import 'package:flutter_ps5_library/utils/widget/rating_widget.dart';
 
 class GamesItemWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -88,24 +89,11 @@ class GamesItemWidget extends StatelessWidget {
               Positioned(
                 top: 0,
                 right: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  color: ratingColor(game.rating),
-                  child: Text(
-                    game.rating.toString(),
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                ),
+                child: RatingWidget(rating: game.rating),
               ),
           ],
         ),
       );
     });
   }
-}
-
-Color ratingColor(double rating) {
-  if (rating > 3) return const Color.fromARGB(255, 74, 157, 77);
-  if (rating > 2) return const Color.fromARGB(255, 195, 117, 0);
-  return const Color.fromARGB(255, 181, 41, 31);
 }

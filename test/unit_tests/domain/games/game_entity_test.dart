@@ -4,21 +4,24 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('Game updatedWith test', () {
     final g = Game(
-        id: 0,
-        name: 'game-name',
-        slug: null,
-        nameOriginal: null,
-        description: null,
-        metacritic: null,
-        metacriticPlatforms: [],
-        tba: true,
-        updated: DateTime(2024),
-        backgroundImage: 'backgroundImage',
-        website: null,
-        rating: 4,
-        playtime: 0,
-        shortScreenshots: [],
-        released: 'released');
+      id: 0,
+      name: 'game-name',
+      slug: null,
+      nameOriginal: null,
+      description: null,
+      metacritic: null,
+      metacriticPlatforms: [],
+      tba: true,
+      updated: DateTime(2024),
+      backgroundImage: 'backgroundImage',
+      website: null,
+      rating: 4,
+      playtime: 0,
+      shortScreenshots: [],
+      released: 'released',
+      developers: [],
+      platforms: [],
+    );
     final ug = Game(
       id: 0,
       name: 'game-name',
@@ -35,6 +38,8 @@ void main() {
       playtime: 0,
       shortScreenshots: [],
       released: null,
+      developers: [],
+      platforms: [],
     );
     final modifiedGame = g.updatedWith(ug);
     expect(modifiedGame.name, equals(ug.name));

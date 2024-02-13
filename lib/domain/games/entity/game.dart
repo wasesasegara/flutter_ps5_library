@@ -1,3 +1,8 @@
+import 'package:flutter_ps5_library/domain/games/entity/developer.dart';
+import 'package:flutter_ps5_library/domain/games/entity/game_platform_metacritic.dart';
+import 'package:flutter_ps5_library/domain/games/entity/platform.dart';
+import 'package:flutter_ps5_library/domain/games/entity/screenshot.dart';
+
 class Game {
   final int? id;
   final String? slug;
@@ -11,6 +16,8 @@ class Game {
   final String? backgroundImage;
   final String? website;
   final double rating;
+  final List<Developer> developers;
+  final List<Platform> platforms;
 
   /// In hours
   final int playtime;
@@ -36,6 +43,8 @@ class Game {
     required this.playtime,
     required this.shortScreenshots,
     required this.released,
+    required this.developers,
+    required this.platforms,
   });
 
   Game updatedWith(Game g) {
@@ -58,24 +67,8 @@ class Game {
       shortScreenshots:
           g.shortScreenshots.isNotEmpty ? g.shortScreenshots : shortScreenshots,
       released: g.released ?? released,
+      developers: g.developers.isNotEmpty ? g.developers : developers,
+      platforms: g.platforms.isNotEmpty ? g.platforms : platforms,
     );
   }
-}
-
-class Screenshot {
-  final String image;
-
-  Screenshot({
-    required this.image,
-  });
-}
-
-class GamePlatformMetacritic {
-  final int? metascore;
-  final String? url;
-
-  GamePlatformMetacritic({
-    required this.metascore,
-    required this.url,
-  });
 }
