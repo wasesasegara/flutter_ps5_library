@@ -1,5 +1,6 @@
 import 'package:flutter_ps5_library/api/api_config.dart';
 import 'package:flutter_ps5_library/data/games/games_repository.dart';
+import 'package:flutter_ps5_library/utils/config.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
@@ -7,6 +8,7 @@ import 'package:mockito/mockito.dart';
 import '../../mocks/http_client.mocks.dart';
 
 void main() {
+  Config.isTest = true;
   final GamesRepository sut = GamesRepositoryImpl();
   test('GamesRepository getGameDetails test', () async {
     final client = MockClient();

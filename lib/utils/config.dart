@@ -1,3 +1,3 @@
 class Config {
-  static const bool isTest = (bool.fromEnvironment('dart.vm.test'));
+  static bool isTest = false;
 }

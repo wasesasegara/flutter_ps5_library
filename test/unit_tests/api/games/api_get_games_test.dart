@@ -1,5 +1,6 @@
 import 'package:flutter_ps5_library/api/api_config.dart';
 import 'package:flutter_ps5_library/api/games/api_get_games.dart';
+import 'package:flutter_ps5_library/utils/config.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
@@ -7,6 +8,7 @@ import 'package:mockito/mockito.dart';
 import '../../mocks/http_client.mocks.dart';
 
 void main() {
+  Config.isTest = true;
   test('apiGetGames test', () async {
     final client = MockClient();
     when(client.get(
@@ -26,8 +28,8 @@ void main() {
   test('GetGamesParams test', () async {
     final sut = GetGamesParams(page: 1, pageSize: 20, platforms: '123');
     final map = sut.toMap();
-    expect(map['page'], 1);
-    expect(map['page_size'], 20);
+    expect(map['page'], '1');
+    expect(map['page_size'], '20');
     expect(map['platforms'], '123');
   });
 }

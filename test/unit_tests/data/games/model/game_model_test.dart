@@ -12,7 +12,7 @@ void main() {
       metacritic: 1,
       metacriticPlatforms: [],
       tba: true,
-      updated: DateTime.now(),
+      updated: null,
       backgroundImage: 'backgroundImage',
       website: 'website',
       rating: 1.0,
@@ -31,7 +31,7 @@ void main() {
     expect(g.metacritic, 1);
     expect(g.metacriticPlatforms, []);
     expect(g.tba, true);
-    expect(g.updated, DateTime.now());
+    expect(g.updated, null);
     expect(g.backgroundImage, 'backgroundImage');
     expect(g.website, 'website');
     expect(g.rating, 1.0);
@@ -52,7 +52,7 @@ void main() {
       'metacritic': 1,
       'metacritic_platforms': [],
       'tba': true,
-      'updated': DateTime.now().toIso8601String(),
+      'updated': null,
       'background_image': 'backgroundImage',
       'website': 'website',
       'rating': 1.0,
@@ -71,7 +71,7 @@ void main() {
     expect(sut.metacritic, 1);
     expect(sut.metacriticPlatforms, []);
     expect(sut.tba, true);
-    expect(sut.updated, DateTime.now());
+    expect(sut.updated, null);
     expect(sut.backgroundImage, 'backgroundImage');
     expect(sut.website, 'website');
     expect(sut.rating, 1.0);

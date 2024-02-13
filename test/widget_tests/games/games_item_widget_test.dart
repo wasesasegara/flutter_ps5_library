@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 import 'package:flutter_ps5_library/feature/games/view/widget/games_item_widget.dart';
+import 'package:flutter_ps5_library/utils/config.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  Config.isTest = true;
   testWidgets('GamesItemWidget test', (tester) async {
     final g = Game(
       id: 0,
