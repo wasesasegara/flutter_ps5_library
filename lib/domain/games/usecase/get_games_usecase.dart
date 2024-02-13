@@ -6,11 +6,12 @@ abstract class GetGamesUsecase {
 }
 
 class GetGamesUsecaseImpl implements GetGamesUsecase {
-  final GamesRepository repo;
+  final GamesRepository _repo;
 
-  GetGamesUsecaseImpl(this.repo);
+  GetGamesUsecaseImpl({GamesRepository? repo})
+      : _repo = repo ?? GamesRepositoryImpl();
 
   @override
   Future<List<Game>> call(int page, String platforms) =>
-      repo.getGames(page: page, platforms: platforms);
+      _repo.getGames(page: page, platforms: platforms);
 }

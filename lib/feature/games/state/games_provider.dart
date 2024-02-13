@@ -14,8 +14,7 @@ class GamesProvider extends ChangeNotifier {
   GamesProvider({
     GamesRepository? repo,
     GetGamesUsecase? getGames,
-  }) : _getGames =
-            getGames ?? GetGamesUsecaseImpl(repo ?? GamesRepositoryImpl());
+  }) : _getGames = getGames ?? GetGamesUsecaseImpl();
 
   Future<void> fetchGames({int? page}) async {
     if (state.isFetching) return;

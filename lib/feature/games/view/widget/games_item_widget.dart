@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ps5_library/domain/games/entity/game.dart';
+import 'package:flutter_ps5_library/utils/config.dart';
 
 class GamesItemWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -17,21 +18,25 @@ class GamesItemWidget extends StatelessWidget {
     String image = game.bgImageUrl;
     return LayoutBuilder(builder: (context, cons) {
       final height = cons.maxWidth;
-      return InkWell(
+      return GestureDetector(
+        key: Key('GamesItemWidget-game-${game.id}'),
         onTap: onTap,
         child: Stack(
           children: [
             if (image.isNotEmpty)
-              CachedNetworkImage(
-                progressIndicatorBuilder: (context, url, progress) => Center(
-                  child: CircularProgressIndicator(value: progress.progress),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-                imageUrl: image,
-                memCacheWidth: MediaQuery.of(context).size.width.toInt(),
-                height: height,
-                fit: BoxFit.cover,
-              )
+              if (!Config.isTest)
+                CachedNetworkImage(
+                  progressIndicatorBuilder: (context, url, progress) => Center(
+                    child: CircularProgressIndicator(value: progress.progress),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  imageUrl: image,
+                  memCacheWidth: MediaQuery.of(context).size.width.toInt(),
+                  height: height,
+                  fit: BoxFit.cover,
+                )
+              else
+                const Icon(Icons.image)
             else
               Container(
                 color: Theme.of(context).primaryColor.withOpacity(0.5),
