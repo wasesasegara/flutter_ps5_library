@@ -18,8 +18,8 @@ class GetGamesUseCaseMock extends Mock implements GetGamesUsecase {
 
 void main() {
   test('GamesProvider test', () async {
-    final getGamesMock = GetGamesUseCaseMock();
-    final sut = GamesProvider(getGames: getGamesMock);
+    final mockGetGames = GetGamesUseCaseMock();
+    final sut = GamesProvider(getGames: mockGetGames);
     await sut.fetchGames(page: 1);
     expect(sut.state.games[0], game1);
   });

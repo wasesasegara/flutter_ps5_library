@@ -15,8 +15,8 @@ class GetGameDetailsUseCaseMock extends Mock implements GetGameDetailsUsecase {
 
 void main() {
   test('GameDetailsProvider test', () async {
-    final getGameDetailsMock = GetGameDetailsUseCaseMock();
-    final sut = GameDetailsProvider(getGame: getGameDetailsMock);
+    final mockGetGameDetails = GetGameDetailsUseCaseMock();
+    final sut = GameDetailsProvider(getGame: mockGetGameDetails);
     await sut.fetchGame('123');
     expect(sut.state.game, game1);
   });
