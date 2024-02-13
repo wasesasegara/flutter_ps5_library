@@ -21,6 +21,7 @@ class GamesScreen extends StatefulWidget {
 class _GamesScreenState extends State<GamesScreen> {
   final double crossAxisSpacing = 16;
   final double paddingSize = 20;
+  bool _shouldShowScrollToTop = false;
 
   final ScrollController _sc = ScrollController();
 
@@ -47,6 +48,14 @@ class _GamesScreenState extends State<GamesScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Latest PS5 Games')),
       body: body,
+      floatingActionButton: _shouldShowScrollToTop
+          ? FloatingActionButton(
+              onPressed: () => _sc.animateTo(0,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut),
+              child: const Icon(Icons.arrow_upward),
+            )
+          : null,
     );
   }
 
@@ -123,6 +132,9 @@ class _GamesScreenState extends State<GamesScreen> {
   }
 
   void _onScroll() {
+    if (!mounted) return;
+    setState(() => _shouldShowScrollToTop =
+        _sc.position.pixels > MediaQuery.of(context).size.height);
     final itemW = ((MediaQuery.of(context).size.width -
                 crossAxisSpacing +
                 2 * paddingSize) /
