@@ -6,7 +6,7 @@ import 'package:flutter_ps5_library/domain/games/entity/game.dart';
 import 'package:flutter_ps5_library/feature/game_details/state/game_details_provider.dart';
 import 'package:flutter_ps5_library/feature/game_details/state/game_details_state.dart';
 import 'package:flutter_ps5_library/feature/games/view/widget/games_item_widget.dart';
-import 'package:flutter_ps5_library/utils/placeholders.dart';
+import 'package:flutter_ps5_library/utils/widget/text_placeholder_widget.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -123,7 +123,7 @@ class _GameDetailsScreenState extends State<GameDetailsScreen> {
     late final Widget desc;
     if (g.description?.isEmpty ?? true) {
       if (state.isFetching) {
-        desc = const ContentPlaceholder(numLines: 5);
+        desc = const TextPlaceholderWidget(numLines: 5);
       } else {
         desc = const Text('No description');
       }
@@ -166,7 +166,7 @@ class _GameDetailsScreenState extends State<GameDetailsScreen> {
                     style: const TextStyle(fontSize: 12),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
               ],
               if (g.released?.isNotEmpty ?? false) ...[
                 const Text('Released'),

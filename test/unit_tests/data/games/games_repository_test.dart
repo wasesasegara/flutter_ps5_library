@@ -1,5 +1,4 @@
 import 'package:flutter_ps5_library/api/api_config.dart';
-import 'package:flutter_ps5_library/api/games/api_get_games.dart';
 import 'package:flutter_ps5_library/data/games/games_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
