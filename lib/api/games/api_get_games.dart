@@ -3,15 +3,19 @@ import 'dart:convert';
 import 'package:flutter_ps5_library/api/api_config.dart';
 import 'package:flutter_ps5_library/data/games/model/game_model.dart';
 import 'package:flutter_ps5_library/data/games/model/games_model.dart';
+import 'package:flutter_ps5_library/utils/config.dart';
 import 'package:flutter_ps5_library/utils/utils.dart';
 import 'package:http/http.dart' as http;
 
-Future<List<GameModel>> apiGetGames(GetGamesParams params) async {
+Future<List<GameModel>> apiGetGames(GetGamesParams params,
+    {http.Client? client}) async {
   final uri = Uri.https(Endpoints.rawg, '/api/games', {
-    'key': ApiKeys.rawg,
-    ...params.toMap(),
+    if (!Config.isTest) ...{
+      'key': ApiKeys.rawg,
+      ...params.toMap(),
+    }
   });
-  final response = await http.get(uri);
+  final response = await (client ?? http.Client()).get(uri);
   if (response.statusCode != 200) {
     throw Exception(
       'Failed to load games\n'
