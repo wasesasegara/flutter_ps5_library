@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_ps5_library/data/games/games_repository.dart';
 import 'package:flutter_ps5_library/domain/games/usecase/get_game_details_usecase.dart';
 import 'package:flutter_ps5_library/feature/game_details/state/game_details_state.dart';
 
@@ -9,10 +8,8 @@ class GameDetailsProvider extends ChangeNotifier {
   final GetGameDetailsUsecase _getGame;
 
   GameDetailsProvider({
-    GamesRepository? repo,
     GetGameDetailsUsecase? getGame,
-  }) : _getGame =
-            getGame ?? GetGameDetailsUsecaseImpl(repo ?? GamesRepositoryImpl());
+  }) : _getGame = getGame ?? GetGameDetailsUsecaseImpl();
 
   Future<void> fetchGame(String id) async {
     if (state.isFetching) return;
@@ -20,7 +17,8 @@ class GameDetailsProvider extends ChangeNotifier {
     notifyListeners();
     state.errMsg = '';
     try {
-      state.game = state.game?.updatedWith(await _getGame(id));
+      final g = await _getGame(id);
+      state.game = state.game?.updatedWith(g) ?? g;
     } catch (e) {
       state.errMsg = e.toString();
     }

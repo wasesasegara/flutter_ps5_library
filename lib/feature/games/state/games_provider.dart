@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_ps5_library/api/api_config.dart';
-import 'package:flutter_ps5_library/data/games/games_repository.dart';
 import 'package:flutter_ps5_library/feature/games/state/games_state.dart';
 import 'package:flutter_ps5_library/domain/games/usecase/get_games_usecase.dart';
 
@@ -12,7 +11,6 @@ class GamesProvider extends ChangeNotifier {
   final GetGamesUsecase _getGames;
 
   GamesProvider({
-    GamesRepository? repo,
     GetGamesUsecase? getGames,
   }) : _getGames = getGames ?? GetGamesUsecaseImpl();
 

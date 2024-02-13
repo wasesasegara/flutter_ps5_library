@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
+import '../../mocks/game_mocks.dart';
+
 class MockGamesRepository extends Mock implements GamesRepository {
   @override
   Future<List<Game>> getGames({
@@ -15,26 +17,6 @@ class MockGamesRepository extends Mock implements GamesRepository {
     return [game1];
   }
 }
-
-final game1 = Game(
-  id: 1,
-  slug: null,
-  name: 'game1',
-  nameOriginal: null,
-  description: null,
-  metacritic: null,
-  metacriticPlatforms: [],
-  tba: null,
-  updated: null,
-  backgroundImage: null,
-  website: null,
-  rating: 0,
-  playtime: 0,
-  shortScreenshots: [],
-  released: null,
-  developers: [],
-  platforms: [],
-);
 
 void main() {
   final mockRepo = MockGamesRepository();
