@@ -1,5 +1,24 @@
 import 'package:flutter_ps5_library/data/games/model/game_model.dart';
+import 'package:flutter_ps5_library/domain/games/entity/developer.dart';
+import 'package:flutter_ps5_library/domain/games/entity/game_platform_metacritic.dart';
+import 'package:flutter_ps5_library/domain/games/entity/platform.dart';
+import 'package:flutter_ps5_library/domain/games/entity/screenshot.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+final _dev1 = Developer(
+  id: 1,
+  name: 'name',
+  slug: 'slug',
+);
+
+final _meta1 = GamePlatformMetacritic(
+  metascore: 1,
+  url: null,
+);
+
+final _plat1 = Platform(id: 1, name: null, imageBackground: null);
+
+final _ss1 = Screenshot(image: 'image');
 
 void main() {
   test('GameModel toEntity test', () {
@@ -10,17 +29,17 @@ void main() {
       nameOriginal: 'nameOriginal',
       description: 'description',
       metacritic: 1,
-      metacriticPlatforms: [],
+      metacriticPlatforms: [_meta1],
       tba: true,
       updated: null,
       backgroundImage: 'backgroundImage',
       website: 'website',
       rating: 1.0,
       playtime: 1,
-      shortScreenshots: [],
+      shortScreenshots: [_ss1],
       released: 'released',
-      developers: [],
-      platforms: [],
+      developers: [_dev1],
+      platforms: [_plat1],
     );
     final g = sut.toEntity();
     expect(g.id, 1);
@@ -29,17 +48,18 @@ void main() {
     expect(g.nameOriginal, 'nameOriginal');
     expect(g.description, 'description');
     expect(g.metacritic, 1);
-    expect(g.metacriticPlatforms, []);
+    expect(g.metacriticPlatforms[0], _meta1);
     expect(g.tba, true);
     expect(g.updated, null);
     expect(g.backgroundImage, 'backgroundImage');
     expect(g.website, 'website');
     expect(g.rating, 1.0);
     expect(g.playtime, 1);
-    expect(g.shortScreenshots, []);
+    expect(g.shortScreenshots[0], _ss1);
     expect(g.released, 'released');
     expect(g.developers, []);
-    expect(g.platforms, []);
+    expect(g.platforms[0], _plat1);
+    expect(g.developers[0], _dev1);
   });
 
   test('GameModel fromJson test', () {
